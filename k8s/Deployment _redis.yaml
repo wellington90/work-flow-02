@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis  # Nome do Deployment (Redis)
+spec:
+  replicas: 1  # Número de réplicas desejadas
+  selector:
+    matchLabels:
+      app: redis  # Rótulo para selecionar os pods
+  template:
+    metadata:
+      labels:
+        app: redis  # Rótulo para o template do pod
+    spec:
+      containers:
+        - name: redis  # Nome do container
+          image: redis:latest  # Imagem do Redis
+          ports:
+            - containerPort: 6379  # Porta em que o Redis está escutando

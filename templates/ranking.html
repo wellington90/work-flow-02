@@ -1,0 +1,23 @@
+<!DOCTYPEhtml>
+<html>
+<head>
+    <title>Sistema de Votação - Ranking</title>
+</head>
+<body>
+    <h1>Ranking de Votação</h1>
+    <table>
+        <tr>
+            <th>Foto</th>
+            <th>Votos</th>
+        </tr>
+        {% for foto, votos in ranking %}
+        <tr>
+            <td>{{ foto }}</td>
+            <td>{{ votos }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h2><a href="/">Voltar</a></h2>
+    
+</body>
+</html>

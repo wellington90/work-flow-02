@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service  # Nome do Service (Redis)
+spec:
+  selector:
+    app: redis  # Seletor para os pods alvos do serviço
+  ports:
+    - protocol: TCP  # Protocolo utilizado (TCP neste caso)
+      port: 6379  # Porta externa do serviço
+      targetPort: 6379  # Porta interna do pod de destino

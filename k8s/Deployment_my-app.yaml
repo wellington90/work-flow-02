@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app  # Nome do Deployment (my-app)
+spec:
+  replicas: 2  # Número de réplicas desejadas
+  selector:
+    matchLabels:
+      app: my-app  # Rótulo para selecionar os pods
+  template:
+    metadata:
+      labels:
+        app: my-app  # Rótulo para o template do pod
+      annotations:
+        prometheus.io/scrape: "true"  # Anotação para o Prometheus coletar métricas
+        prometheus.io/path: "/metrics"  # Caminho das métricas
+        prometheus.io/port: "5000"  # Porta para acessar as métricas
+    spec:
+      containers:
+        - name: app-container  # Nome do container
+          image: w3ll1n9t0n/votacao-app:latest  # Imagem do aplicativo
+          ports:
+            - containerPort: 5000  # Porta em que o aplicativo está escutando
+          env:
+            - name: REDIS_HOST  # Variável de ambiente para o host do Redis
+              valueFrom:
+                configMapKeyRef:
+                  name: minha-configuracao  # Nome do ConfigMap
+                  key: redis-host  # Chave do ConfigMap para o host do Redis
+            - name: REDIS_PORT  # Variável de ambiente para a porta do Redis
+              valueFrom:
+                configMapKeyRef:
+                  name: minha-configuracao  # Nome do ConfigMap
+                  key: redis-port  # Chave do ConfigMap para a porta do Redis

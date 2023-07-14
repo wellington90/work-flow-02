@@ -1,0 +1,21 @@
+version: '3'  # Versão do Docker Compose
+
+services:
+  redis:  # Serviço Redis
+    image: redis  # Imagem do Redis
+    ports:
+      - 6379:6379  # Mapeamento da porta do host para a porta do contêiner
+    networks:
+      - mynetwork  # Atribuição do serviço à rede "mynetwork"
+
+  web:  # Serviço da aplicação web
+    build: .  # Diretório de build do Dockerfile
+    ports:
+      - 5000:5000  # Mapeamento da porta do host para a porta do contêiner
+    depends_on:
+      - redis  # Dependência do serviço Redis
+    networks:
+      - mynetwork  # Atribuição do serviço à rede "mynetwork"
+
+networks:
+  mynetwork:  # Definição da rede "mynetwork"

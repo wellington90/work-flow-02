@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sistema de Votação</title>
+    <style>
+        /* Estilos CSS para a exibição das fotos */
+        .foto {
+            display: inline-block;
+            margin: 10px;
+        }
+    </style>
+    <!-- Inclua o CSS e o JS do SweetAlert -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.js"></script>
+</head>
+<body>
+    <h1>Sistema de Votação</h1>
+    <h2>Escolha a melhor foto:</h2>
+    {% for foto, url in fotos.items() %}
+        <div class="foto">
+            <img src="{{ url }}" alt="{{ foto }}" width="200" height="200">
+            <form action="/votar" method="post">
+                <input type="hidden" name="foto_vencedora" value="{{ foto }}">
+                <input type="hidden" name="foto_perdedora" value="{{ foto|replace('foto', 'foto_') }}">
+                <input type="submit" value="Votar" onclick="exibirPopup()">
+            </form>
+        </div>
+    {% endfor %}
+
+    <!-- Script para exibir o popup -->
+    <script>
+        function exibirPopup() {
+            Swal.fire({
+                title: 'Voto registrado com sucesso!',
+                icon: 'success',
+                timer: 3000,
+                showConfirmButton: false
+            });
+        }
+    </script>
+    <h2><a href="/ranking">Ver Ranking</a></h2>
+</body>
+</html>

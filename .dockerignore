@@ -1,0 +1,8 @@
+# Comentário: Ignorar arquivos Python compilados
+docker-compose.yaml
+dockerfile  
+shell.sh
+port-forward.sh
+main.Py
+k8s/
+

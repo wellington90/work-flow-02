@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-svc  # Nome do Service (my-svc)
+  namespace: default  # Namespace do Service
+spec:
+  selector:
+    app: my-app  # Seletor para os pods alvos do serviço
+  ports:
+    - name: http  # Nome da porta
+      port: 5000  # Porta externa do serviço
+      targetPort: 5000  # Porta interna do pod de destino
+  type: LoadBalancer  # Tipo de serviço (LoadBalancer neste caso)
